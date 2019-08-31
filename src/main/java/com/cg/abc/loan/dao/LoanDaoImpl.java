@@ -1,5 +1,7 @@
 package com.cg.abc.loan.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +20,7 @@ public class LoanDaoImpl implements LoanDao {
 	}
 	
 	@Override
-	public Loan getLoanDetails(String accountNumber) {
+	public Loan getLoanById(String accountNumber) {
 		return loanRepository.getLoanByAccountNumber(accountNumber);
 	}
 
@@ -26,6 +28,11 @@ public class LoanDaoImpl implements LoanDao {
 	public String saveOrUpdateLoan(Loan loan) {
 		loanRepository.save(loan);
 		return loan.getAccountNumber();
+	}
+
+	@Override
+	public List<Loan> getAllLoans() {
+		return loanRepository.findAll();
 	}
 
 	

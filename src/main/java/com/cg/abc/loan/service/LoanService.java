@@ -8,12 +8,14 @@ import com.cg.abc.loan.model.LoanTransaction;
 public interface LoanService {
 	
 	void applyLoan(Loan loan);
+	
+	List<Loan> getAllLoans();
+	
+	Loan getLoanById(String actNo);
      
 	double calculateEmi(double loanAmount,double interestRate,int time );
 	
 	String payEmi(String actNo);
-	
-	double showBalance(String actNo);
 	
 	String foreClose(String actNo);
 	

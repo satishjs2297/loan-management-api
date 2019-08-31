@@ -3,6 +3,7 @@ package com.cg.abc.loan.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import com.cg.abc.loan.model.Loan;
 import com.cg.abc.loan.model.LoanTransaction;
 import com.cg.abc.loan.service.LoanService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/loan")
 public class LoanManagementController {
@@ -29,10 +31,15 @@ public class LoanManagementController {
 		return "Loan With Account Number : "+ loan.getAccountNumber() + " has been successfully applied";
 	}
 	
-	@GetMapping("/showBalance/{accountNumber}")
-	public double showBalance(@PathVariable String accountNumber) {
-		return loanService.showBalance(accountNumber);	
+	@GetMapping("/getLoanById/{accountNumber}")
+	public Loan getLoanById(@PathVariable String accountNumber) {
+		return loanService.getLoanById(accountNumber);	
 	}
+	
+	@GetMapping("/getAllLoans")
+	public List<Loan> getAllLoans() {
+		return loanService.getAllLoans();	
+	}	
 	
 	@PutMapping("/payEmi/{accountNumber}")
 	public String payEmi(@PathVariable String accountNumber) {

@@ -42,12 +42,12 @@ public class LoanServiceImpl implements LoanService {
 	@Override
 	public String payEmi(String actNo) {
 
-		Loan loan = dao.getLoanDetails(actNo);
+		Loan loan = dao.getLoanById(actNo);
 		double loanAmount = loan.getLoanAmount();
 		double interestRate = loan.getInterestRate();
-		int time = dao.getLoanDetails(actNo).getTime();
+		int time = dao.getLoanById(actNo).getTime();
 		double emi = calculateEmi(loanAmount, interestRate, time);
-		double amount = dao.getLoanDetails(actNo).getTotalAmount();
+		double amount = dao.getLoanById(actNo).getTotalAmount();
 		loan.setTotalAmount(amount - emi);
 		dao.saveOrUpdateLoan(loan);
 		loanTransactionRepository.save(new LoanTransaction(actNo, emi, 1));
@@ -55,14 +55,13 @@ public class LoanServiceImpl implements LoanService {
 	}
 
 	@Override
-	public double showBalance(String actNo) {
-		Loan loanDetails = dao.getLoanDetails(actNo);
-		return loanDetails.getTotalAmount();
+	public Loan getLoanById(String actNo) {
+		return  dao.getLoanById(actNo);
 	}
 
 	@Override
 	public String foreClose(String actNo)  {
-		Loan loan = dao.getLoanDetails(actNo);
+		Loan loan = dao.getLoanById(actNo);
 		if (loan != null) {
 			loan.setLoanAmount(0);
 			loan.setTotalAmount(0);
@@ -76,6 +75,11 @@ public class LoanServiceImpl implements LoanService {
 	@Override
 	public List<LoanTransaction> getAllLoanTransactions() {
 		return loanTransactionRepository.findAll();
+	}
+
+	@Override
+	public List<Loan> getAllLoans() {
+		return dao.getAllLoans();
 	}
 
 }
