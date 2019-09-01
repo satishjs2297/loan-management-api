@@ -15,7 +15,7 @@ public interface LoanService {
      
 	double calculateEmi(double loanAmount,double interestRate,int time );
 	
-	String payEmi(String actNo);
+	Loan payEmi(String actNo);
 	
 	String foreClose(String actNo);
 	

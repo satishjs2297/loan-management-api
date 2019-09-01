@@ -75,7 +75,7 @@ public class Loan {
 	}
 
 	public void setSalary(double salary) {
-		this.salary = salary;
+		this.salary = Math.round(salary * 100) / 100;
 	}
 
 	public double getLoanAmount() {
@@ -83,7 +83,7 @@ public class Loan {
 	}
 
 	public void setLoanAmount(double loanAmount) {
-		this.loanAmount = loanAmount;
+		this.loanAmount = Math.round(loanAmount * 100) / 100;
 	}
 
 	public int getTime() {
@@ -99,7 +99,7 @@ public class Loan {
 	}
 
 	public void setInterestRate(double interestRate) {
-		this.interestRate = interestRate;
+		this.interestRate = Math.round(interestRate * 100) / 100;
 	}
 
 	public double getTotalAmount() {
@@ -107,7 +107,7 @@ public class Loan {
 	}
 
 	public void setTotalAmount(double totalAmount) {
-		this.totalAmount = totalAmount;
+		this.totalAmount = Math.round(totalAmount * 100) / 100;
 	}
 
 	@Override

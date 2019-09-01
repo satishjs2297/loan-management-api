@@ -24,7 +24,7 @@ public class LoanTransaction {
 	
 	public LoanTransaction(String accountNumber, double emiAmount, Integer numberOfInstallments) {
 		this.accountNumber = accountNumber;
-		this.emiAmount = emiAmount;
+		this.emiAmount =  Math.round(emiAmount * 100) / 100;
 		this.numberOfInstallments = numberOfInstallments;
 	}
 
@@ -49,7 +49,7 @@ public class LoanTransaction {
 	}
 
 	public void setEmiAmount(double emiAmount) {
-		this.emiAmount = emiAmount;
+		this.emiAmount =  Math.round(emiAmount * 100) / 100;
 	}
 
 	public Integer getNumberOfInstallments() {

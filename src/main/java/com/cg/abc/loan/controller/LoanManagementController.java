@@ -44,19 +44,20 @@ public class LoanManagementController {
 	}
 
 	@PutMapping("/payEmi/{accountNumber}")
-	public ResponseEntity<String> payEmi(@PathVariable String accountNumber) {
-		return new ResponseEntity<String>(loanService.payEmi(accountNumber), HttpStatus.OK);
+	public Loan payEmi(@PathVariable String accountNumber) {
+		return loanService.payEmi(accountNumber);
 	}
 
 	@GetMapping("/calculate/{loanAmount}/{interestRate}/{time}")
-	public double calculateEmi(@PathVariable double loanAmount, @PathVariable double interestRate,
+	public ResponseEntity<Double> calculateEmi(@PathVariable double loanAmount, @PathVariable double interestRate,
 			@PathVariable int time) {
-		return loanService.calculateEmi(loanAmount, interestRate, time);
+		return new ResponseEntity<Double>(loanService.calculateEmi(loanAmount, interestRate, time), HttpStatus.OK);
 	}
 
 	@PutMapping("/forceclose/{accountNumber}")
 	public ResponseEntity<String> forceClose(@PathVariable String accountNumber) {
-		return new ResponseEntity<String>(loanService.foreClose(accountNumber), HttpStatus.OK);
+		loanService.foreClose(accountNumber);
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
 	@GetMapping("/getAllLoanTransactions")

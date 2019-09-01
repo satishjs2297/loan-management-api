@@ -40,7 +40,7 @@ public class LoanServiceImpl implements LoanService {
 	}
 
 	@Override
-	public String payEmi(String actNo) {
+	public Loan payEmi(String actNo) {
 
 		Loan loan = dao.getLoanById(actNo);
 		double loanAmount = loan.getLoanAmount();
@@ -51,7 +51,7 @@ public class LoanServiceImpl implements LoanService {
 		loan.setTotalAmount(amount - emi);
 		dao.saveOrUpdateLoan(loan);
 		loanTransactionRepository.save(new LoanTransaction(actNo, emi, 1));
-		return "EMI Amount:" + emi + " has been successfully paid.";
+		return loan;
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class LoanServiceImpl implements LoanService {
 			loan.setLoanAmount(0);
 			loan.setTotalAmount(0);
 			dao.saveOrUpdateLoan(loan);
-			return "Loan Foreclosed";
+			return "Loan Fore closed";
 		} else {
 			throw new LoanException("Invalid AccountNo");
 		}		
